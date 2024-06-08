@@ -2,83 +2,135 @@
 Práctica final
 # Proyecto de Análisis de Datos de Marketing con Power BI
 
-Este proyecto ha sido desarrollado como parte del curso de Power BI y tiene como objetivo analizar una serie de datos del departamento de marketing de DH Marketing Consultants. A continuación, se detallan los pasos para realizar el proyecto.
+# Power BI Marketing Campaign Analysis
 
 ## Preparación
 
 ### Paso 1: Descargar los datos
 1. Visita el enlace: [Kaggle Marketing Campaign Dataset](https://www.kaggle.com/datasets/rodsaldanha/arketing-campaign?resource=download).
 2. Inicia sesión en Kaggle o crea una cuenta si aún no tienes una.
-3. Descarga el archivo CSV haciendo clic en el botón de descarga. Guarda el archivo en una ubicación accesible en tu computadora.
+3. Descarga el archivo CSV haciendo clic en el botón de descarga.
+4. Guarda el archivo en una ubicación accesible en tu computadora.
 
-### Paso 2: Conectar los datos a Power BI
+### Paso 2: Configurar Power BI Desktop
 1. Abre Power BI Desktop.
-2. En la pestaña "Inicio", selecciona "Obtener datos".
-3. Selecciona "Texto/CSV".
-4. Navega hasta la ubicación donde guardaste el archivo CSV descargado y selecciónalo. Haz clic en "Abrir".
-5. Aparecerá una vista previa de los datos. Haz clic en "Cargar" para importar los datos a Power BI.
+2. Guarda tu proyecto inmediatamente para evitar la pérdida de datos. Ve a "Archivo" > "Guardar" y elige una ubicación para tu archivo PBIX.
 
-### Paso 3: Revisar los datos en Power Query
-1. En la pestaña "Inicio", selecciona "Transformar datos". Esto abrirá el Power Query Editor.
-2. Revisa cada columna para entender su contenido y estructura. Verifica los nombres de las columnas y los datos que contienen.
+## Proceso de Extracción, Transformación y Carga de Datos (ETL)
 
-### Paso 4: Analizar y modificar los tipos de datos
-1. Selecciona una columna para revisar su tipo de datos.
-2. Para cambiar el tipo de datos, selecciona la columna, haz clic derecho y selecciona "Cambiar tipo". Elige el tipo de datos correcto (por ejemplo, "Fecha", "Número entero", "Texto").
-3. Repite este paso para cada columna que necesite un cambio de tipo de datos.
+### Extracción de datos
+1. En Power BI Desktop, ve a la pestaña "Inicio" y selecciona "Obtener datos".
+2. Selecciona "Texto/CSV".
+3. Navega hasta la ubicación donde guardaste el archivo CSV descargado y selecciónalo. Haz clic en "Abrir".
+4. Aparecerá una vista previa de los datos. Haz clic en "Cargar" para importar los datos a Power BI.
 
-## Limpieza de Datos
+### Transformaciones de datos
 
-### Paso 1: Buscar errores en los datos
-1. Revisar valores atípicos:
-   - Filtra las columnas numéricas para identificar valores que no sean realistas (por ejemplo, edades mayores de 100 años).
-   - Haz clic en el icono de filtro en la cabecera de la columna y selecciona "Número de filtros" para buscar valores extremos.
-2. Revisar datos en blanco:
-   - Filtra las columnas para mostrar solo las filas que contienen valores en blanco. Haz clic en el icono de filtro y selecciona "Filtrar por valor" y luego marca la opción "(Blanks)".
-3. Revisar errores de escritura:
-   - Filtra columnas de texto para buscar inconsistencias en los nombres o categorías.
-   - Usa el "Filtro de texto" en la cabecera de la columna para buscar variaciones en los datos de texto.
+#### Abrir el Power Query Editor:
+1. En la pestaña "Inicio", selecciona "Transformar datos".
 
-### Paso 2: Corregir errores
-1. Reemplazar valores erróneos:
-   - Selecciona la columna que contiene el valor erróneo.
-   - Haz clic derecho sobre la celda con el valor incorrecto y selecciona "Reemplazar valores".
-   - Introduce el valor que deseas reemplazar y el nuevo valor. Haz clic en "Aceptar".
-2. Eliminar filas con datos incorrectos:
-   - Selecciona la fila que deseas eliminar haciendo clic en el número de fila.
-   - Haz clic derecho y selecciona "Eliminar" para eliminar la fila completa.
-3. Eliminar valores en blanco:
-   - Filtra las columnas para mostrar solo las filas con valores en blanco (como se explicó antes).
-   - Selecciona las filas y haz clic derecho para elegir "Eliminar filas".
+#### Limpieza y transformación de datos
+1. **Revisar y cambiar los nombres de las columnas**:
+    - Haz doble clic en los nombres de las columnas para renombrarlas de manera más descriptiva. Por ejemplo, renombra "ID" a "ClienteID", "Income" a "Ingreso", etc.
+2. **Eliminar columnas o filas vacías**:
+    - Selecciona las columnas o filas vacías, haz clic derecho y selecciona "Eliminar".
+3. **Uso de Lenguaje M para transformaciones avanzadas**:
+    - En el editor de Power Query, puedes usar Lenguaje M para realizar transformaciones avanzadas. Por ejemplo, si deseas combinar columnas, puedes usar `Table.CombineColumns`.
+4. **Combinación y tratamiento de columnas**:
+    - Si tienes columnas que representan diferentes aspectos del mismo atributo, puedes combinarlas. Por ejemplo, si tienes "Estado Civil" y "Educación", puedes combinarlas usando "Combinar columnas".
+5. **Creación de tablas de dimensiones**:
+    - Para crear tablas de dimensiones, selecciona las columnas relevantes y crea una nueva tabla. Por ejemplo, puedes crear una tabla de dimensiones para "Estado Civil" y "Educación".
+6. **Carga de datos en el modelo**:
+    - Una vez completadas las transformaciones, haz clic en "Cerrar y aplicar" para cargar los datos transformados en el modelo de Power BI.
 
-## Transformación de Datos
+## Desarrollo del Modelo de Datos
 
-### Paso 1: Renombrar columnas
-1. En el Power Query Editor, haz doble clic en el nombre de la columna para renombrarla.
-2. Escribe el nuevo nombre que sea claro y descriptivo. Repite este paso para todas las columnas que necesiten un nombre más adecuado.
+### Implementar un modelo de datos adecuado
 
-### Paso 2: Organizar columnas
-1. Reordena las columnas arrastrando la cabecera de la columna a la posición deseada.
-2. Proporciona la razón de los cambios en las columnas, por ejemplo:
-   - "Renombré la columna 'ID' a 'ClienteID' para clarificar que se refiere a la identificación del cliente."
-   - "Moví la columna 'Fecha' al inicio para facilitar la referencia temporal en los análisis posteriores."
+1. **Crear un modelo de datos en estrella**:
+    - En la vista de modelo, asegúrate de que la tabla de hechos (la principal) esté en el centro y que las tablas de dimensiones estén conectadas a ella.
 
-## Modelado de Datos
+### Métricas de DAX
 
-### Paso 1: Crear un modelo de datos
-1. Cambia a la vista de modelo seleccionando el icono de "Modelo" en el panel izquierdo.
-2. Crear relaciones:
-   - Arrastra una columna de una tabla (por ejemplo, "ClienteID") y suéltala sobre la columna correspondiente en otra tabla.
-   - Aparecerá una ventana de configuración de relación. Verifica las columnas y ajusta la cardinalidad si es necesario (por ejemplo, "Uno a muchos").
-   - Haz clic en "Aceptar" para crear la relación.
-3. Estructura de estrella:
-   - Asegúrate de que tu tabla de hechos esté en el centro y que las tablas de dimensiones estén conectadas a ella en una disposición de estrella.
+1. **Total de clientes**:
+    ```DAX
+    TotalClientes = COUNTROWS(TablaDeHechos)
+    ```
+2. **Ingreso medio de los clientes**:
+    ```DAX
+    IngresoMedio = AVERAGE(TablaDeHechos[Ingreso])
+    ```
+3. **Totales de compras por producto**:
+    ```DAX
+    TotalComprasPorProducto = SUM(TablaDeHechos[Compras])
+    ```
+4. **Totales por campañas**:
+    ```DAX
+    TotalPorCampañas = SUM(TablaDeHechos[Campañas])
+    ```
 
-## Métricas de DAX
+### Creación de la tabla calendario
 
-### Total de clientes
-1. En la vista de informe, selecciona "Nueva Medida" en la pestaña "Modelado".
-2. Escribe la siguiente fórmula DAX:
-   ```DAX
-   TotalClientes = COUNTROWS(Tabla)
+1. **Crear una tabla calendario**:
+    - Ve a la vista de datos, haz clic derecho en el panel de tablas y selecciona "Nueva tabla".
+    - Crea la tabla calendario usando DAX:
+    ```DAX
+    Calendario = 
+    ADDCOLUMNS (
+        CALENDAR (DATE(2020, 1, 1), DATE(2023, 12, 31)),
+        "Año", YEAR([Date]),
+        "Mes", MONTH([Date]),
+        "NombreMes", FORMAT([Date], "MMMM"),
+        "Trimestre", QUARTER([Date])
+    )
+    ```
 
+## Desarrollar Visualizaciones
+
+### Paso 1: Crear visualizaciones
+
+1. **Visión general de los datos**:
+    - Crea una página con gráficos que den una visión general de los datos, como ventas totales, número de clientes, etc.
+    - Usa gráficos de líneas, barras, anillos, tablas y matrices.
+2. **Datos analizando las campañas**:
+    - Crea una página que se enfoque en el análisis de las campañas de marketing.
+    - Usa gráficos de barras apiladas y tablas para mostrar el rendimiento de cada campaña.
+3. **Datos analizando los productos**:
+    - Crea una página que se enfoque en el análisis de los productos.
+    - Usa gráficos de anillos y tablas para mostrar las ventas por producto.
+4. **Hoja cero oculta para anotaciones**:
+    - Agrega una nueva página y déjala en blanco para realizar anotaciones internas.
+
+### Paso 2: Configurar interacciones y filtros
+
+1. **Agregar filtros**:
+    - En cada visualización, usa el panel de filtros para agregar filtros de página o filtros de visualización.
+2. **Configurar interacciones**:
+    - Selecciona una visualización, luego en la pestaña "Formato", selecciona "Editar interacciones".
+    - Configura cómo las visualizaciones interactúan entre sí para que las selecciones afecten adecuadamente a todas las visualizaciones relacionadas.
+
+## Publicar y compartir el informe
+
+### Paso 1: Publicar el informe
+1. En la pestaña "Inicio", selecciona "Publicar".
+2. Inicia sesión en tu cuenta de Power BI Service.
+3. Selecciona el área de trabajo donde deseas publicar el informe y haz clic en "Seleccionar".
+
+### Paso 2: Compartir el enlace
+1. Abre Power BI Service en tu navegador.
+2. Navega hasta el informe publicado.
+3. Selecciona "Archivo" > "Obtener enlace" y copia el enlace para compartirlo.
+
+## Entrega
+
+1. **Guardar el archivo PBIX**.
+2. **Exportar el informe como PDF**:
+    - En Power BI Desktop, ve a "Archivo" > "Exportar" > "Exportar a PDF".
+3. **Crear un archivo con las métricas de DAX**:
+    - Utiliza DAX Studio para crear un archivo con las métricas solicitadas.
+4. **Comprimir los archivos en un ZIP y nómbralo con tu nombre y apellido**. Asegúrate de que no supere los 20 MB.
+
+### Archivos a entregar
+- Archivo PBIX.
+- PDF exportado.
+- Archivo de DAX Studio con las métricas.
